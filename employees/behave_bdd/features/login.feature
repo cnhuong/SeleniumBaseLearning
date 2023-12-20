@@ -1,4 +1,4 @@
 Feature: SeleniumBase scenarios for the Odoo
 
-  Background:
-    Given Open the Odoo Page
+  Scenario: test
+    When Open the Odoo Page
