@@ -1,5 +1,6 @@
 import csv
 import smtplib
+import unittest
 from email.mime.application import MIMEApplication
 
 from seleniumbase import BaseCase
@@ -9,7 +10,7 @@ from email.mime.text import MIMEText
 import os
 
 
-class SendEmailSteps(BaseCase):
+class SendEmailSteps(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.__initialize_variables()
@@ -86,6 +87,15 @@ class SendEmailSteps(BaseCase):
                     msg=self.message.as_string()
                 )
             self.my_server.quit()
+
+    def send_multiple_emails(self, list_email, text_content):
+        for to_emails in list_email:
+            self.my_server.sendmail(
+                from_addr=self.from_email,
+                to_addrs=to_emails,
+                msg=text_content
+            )
+        self.my_server.quit()
 
     def send_email(self):
         self.my_server.sendmail(

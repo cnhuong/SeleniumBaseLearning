@@ -47,3 +47,21 @@ class SendEmail(SendEmailSteps):
                 Thanks,
                 …… """
         self.send_multiple_customized_file_to_email(text_content)
+
+    def test_send_multiple_private_emails(self):
+        self.set_from_email('caongochuong0601@gmail.com')
+        self.passkeys_from_email('wtth owce lykw wqlk')
+        self.setup_server()
+        text_content = """ Thanks """
+        list_email = ["huongtest1@yopmail.com", "huongtest2@yopmail.com"]
+        self.send_multiple_emails(list_email, text_content)
+
+    def test_send_multiple_public_emails(self):
+        self.set_from_email('caongochuong0601@gmail.com')
+        self.passkeys_from_email('wtth owce lykw wqlk')
+        self.setup_server()
+        list_email = ["huongtest1@yopmail.com", "huongtest2@yopmail.com"]
+        self.set_to_email(list_email)
+        self.set_msg(MIMEMultipart())
+        self.add_content_to_email('this is testing !!')
+        self.send_email()
